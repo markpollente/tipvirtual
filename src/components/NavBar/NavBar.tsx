@@ -1,23 +1,29 @@
+import { navData } from "../../lib/navData";
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import MenuOpenRoundedIcon from '@mui/icons-material/MenuOpenRounded';
+import { NavLink } from "react-router-dom";
+import {useState} from "react";
+import styles from './NavBar.module.css';
 
-import "./NavBar.css";
-
-export default function NavBar() {
-
-
+export default function topNav() {
+  const [open, setopen] = useState(true)
+  const toggleOpen = () => {
+    setopen(!open)
+}
   return (
-    <div className="bg-main shadow-md top-0">
-      <div className="container mx-auto py-6 px-2 lg:grid gap-10 grid-cols-7 justify-between items-center">
-        <div className="col-span-1 scale-125 hover:scale-150">
-          <a href="/"><img src="/assets/tip-logo.png" alt="logo" className="w-full h-12 object-contain" /></a>
-        </div>
-        <div className="col-span-4 font-bold text-lg text-white">
-          <h3 className="hover:text-main cursor-pointer">TIP Virtual Tour</h3>
-        </div>
-        <div className="col-span-2 font-medium text-sm hidden xl:gap-14 2xl:gap-20 justify-between lg:flex xl:justify-end items-center">
-          <a className="hover:text-main transitions text-white" href="/">Home</a>
-          <a className="hover:text-main transitions text-white" href="/about">About</a>
-        </div>
+    <div className={open?styles.topnavBtn:styles.topnavBtnOpen}>
+      <button className={styles.menuBtn} onClick={toggleOpen}>
+              {open? <MenuRoundedIcon />: <MenuOpenRoundedIcon />}
+      </button>
+      <div className={open?styles.topnav:styles.topnavOpen}>
+      <a href="/" className={styles.toplogo}><img src="../../assets/tip-informal-logo.png" alt="logo" className="w-full h-12 object-contain" /></a>
+        {navData.map(item =>{
+            return <NavLink key={item.id} className={styles.topitem} to={item.link}>
+                      {item.icon}
+                      <span className={open?styles.linkText:styles.linkTextOpen}>{item.text}</span>
+                  </NavLink>
+        })}
       </div>
     </div>
-  );
+  )
 }

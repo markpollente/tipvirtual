@@ -1,0 +1,77 @@
+.topnav {
+    transition: visibility 0.1s ease-in-out;
+    background-color: #292929;
+    visibility: hidden;
+    flex: 1;
+    flex-direction: row;
+    height: 100%;
+}
+ 
+.topnavOpen {
+    composes: topnav;
+    visibility : visible;
+    transition: visibility 0.1s ease-in-out;
+}
+
+.toplogo {
+    position: absolute;
+    left: 0;
+    transition: visibility 0.5s ease-in-out;
+}
+ 
+.topnavBtn {
+    background-color: #292929;
+    position: absolute;
+    height: 0;
+    width: 100%;
+    transition: height 0.3s ease-in-out;
+}
+ 
+.topnavBtnOpen {
+    composes: topnavBtn;
+    transition: height 0.3s ease-in-out;
+    height: 50px;
+}
+
+.topitem {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 20px;
+    cursor: pointer;
+    color: #B2BAC2;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+ 
+.linkText {
+    padding-left: 16px;
+    visibility: hidden;
+    
+    transition: visibility 0.1s ease-in-out;
+}
+ 
+.linkTextOpen {
+    composes: linkText;
+    visibility: visible;
+    transition: visibility 0.5s ease-in-out;
+}
+
+.topitem:hover {
+    background-color: #244f7d1c;
+}
+ 
+.menuBtn {
+    align-self: center;
+    align-self: flex-start; 
+    justify-self: flex-end;
+    color: #B2BAC2;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #292929;
+    padding: 10px;
+}
