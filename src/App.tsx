@@ -1,17 +1,24 @@
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
-import Tour from "./components/Tour/Tour";
+import Home from "./scenes/Home";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 function App() {
 
 
   return (
-    <>
-      <NavBar />
-      <div className="container mx-auto min-h-screen px-2 mt-2 mb-6">
-        <Tour />
-      </div>
-    </>
+    <div className="App">
+     <NavBar/>
+     <main>
+       <Routes>
+         <Route path="/" element={<Home />}/>
+       </Routes>
+     </main>
+   </div>
   );
 }
 
