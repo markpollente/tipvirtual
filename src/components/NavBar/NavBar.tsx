@@ -1,29 +1,30 @@
-import { navData } from "../../lib/navData";
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import MenuOpenRoundedIcon from '@mui/icons-material/MenuOpenRounded';
+import MenuOpenRoundedIcon from "@mui/icons-material/MenuOpenRounded";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import {useState} from "react";
-import styles from './NavBar.module.css';
+import { navData } from "../../lib/navData";
+import styles from "./NavBar.module.css";
 
-export default function topNav() {
-  const [open, setopen] = useState(true)
+export default function NavBar() {
+  const [open, setOpen] = useState(true);
   const toggleOpen = () => {
-    setopen(!open)
-}
+    setOpen(!open);
+  };
   return (
-    <div className={open?styles.topnavBtn:styles.topnavBtnOpen}>
+    <div className={open ? styles.topnavBtn : styles.topnavBtnOpen}>
       <button className={styles.menuBtn} onClick={toggleOpen}>
-              {open? <MenuRoundedIcon />: <MenuOpenRoundedIcon />}
+        {open ? <MenuRoundedIcon/> : <MenuOpenRoundedIcon/>}
       </button>
-      <div className={open?styles.topnav:styles.topnavOpen}>
-      <a href="/" className={styles.toplogo}><img src="../../assets/tip-informal-logo.png" alt="logo" className="w-full h-12 object-contain" /></a>
-        {navData.map(item =>{
-            return <NavLink key={item.id} className={styles.topitem} to={item.link}>
-                      {item.icon}
-                      <span className={open?styles.linkText:styles.linkTextOpen}>{item.text}</span>
-                  </NavLink>
+      <div className={open ? styles.topnav : styles.topnavOpen}>
+        <a href="/" className={styles.toplogo}><img src="../../assets/tip-informal-logo.png" alt="logo"
+                                                    className="w-full h-12 object-contain"/></a>
+        {navData.map(item => {
+          return <NavLink key={item.id} className={styles.topitem} to={item.link}>
+            {item.icon}
+            <span className={open ? styles.linkText : styles.linkTextOpen}>{item.text}</span>
+          </NavLink>;
         })}
       </div>
     </div>
-  )
+  );
 }
