@@ -54,7 +54,7 @@ function Tour() {
   const initTags = async () =>  {
     await sdk?.Mattertag.add([{
       label: 'Main Building',
-      description: "Test",
+      description: "",
       anchorPosition: {x: -78.8348218075196, y: 1.224310426550836, z: -43.62401061071125},
       stemVector: { // make the Tag stick straight up and make it 0.30 meters (~1 foot) tall
         x: 0,
@@ -66,22 +66,7 @@ function Tour() {
         g: 0.0,
         b: 1.0,
       },
-    },
-      {
-        label: 'Parking',
-        description: "Test",
-        anchorPosition: {x: -74.19203936201427, y: 0.0320872962474823, z: -30.431369493758055},
-        stemVector: { // make the Tag stick straight up and make it 0.30 meters (~1 foot) tall
-          x: 0,
-          y: 0.30,
-          z: 0,
-        },
-        color: { // blue disc
-          r: 0.0,
-          g: 0.0,
-          b: 1.0,
-        },
-      }
+    }
       ]);
   }
 
@@ -99,10 +84,17 @@ function Tour() {
 
 
       <div className="grid gap-2.5 my-5 mx-auto max-w-[150px] justify-center">
-        <ol>
+      {/*<ol>
           {favorites.map(fav => <li key={fav.id}>
             <button onClick={() => goToFavorite(fav.id)}>{fav.label}</button>
           </li>)}
+        </ol>*/}
+        <ol className="predefTag">
+          {favorites.map((fav, index) => (
+            <li key={fav.id} className={`predefTag-${index + 1}`}>
+                <button onClick={() => goToFavorite(fav.id)}>{fav.label}</button>
+            </li>
+          ))}
         </ol>
 
         <label className="text-sm">

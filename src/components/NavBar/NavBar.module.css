@@ -5,6 +5,7 @@
     flex: 1;
     flex-direction: row;
     height: 100%;
+    
 }
  
 .topnavOpen {
@@ -21,7 +22,7 @@
  
 .topnavBtn {
     background-color: #292929;
-    position: absolute;
+    position: fixed;
     height: 0;
     width: 100%;
     transition: height 0.3s ease-in-out;

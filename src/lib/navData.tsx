@@ -1,6 +1,6 @@
 import HomeIcon from '@mui/icons-material/Home';
-import TravelExploreIcon from '@mui/icons-material/TravelExplore';
-import BarChartIcon from '@mui/icons-material/BarChart';
+import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
+import ModelTrainingRoundedIcon from '@mui/icons-material/ModelTrainingRounded';
 import SettingsIcon from '@mui/icons-material/Settings';
  
 export const navData = [
@@ -12,20 +12,14 @@ export const navData = [
     },
     {
         id: 1,
-        icon: <TravelExploreIcon/>,
-        text: "Explore",
-        link: "explore"
+        icon: <InfoRoundedIcon/>,
+        text: "About",
+        link: "about"
     },
     {
         id: 2,
-        icon: <BarChartIcon/>,
-        text: "Statistics",
-        link: "statistics"
+        icon: <ModelTrainingRoundedIcon/>,
+        text: "Progress",
+        link: "Progress"
     },
-    {
-        id: 3,
-        icon: <SettingsIcon/>,
-        text: "Settings",
-        link: "settings"
-    }
 ]
