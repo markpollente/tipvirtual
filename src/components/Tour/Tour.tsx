@@ -7,22 +7,44 @@ import "./Tour.css";
 
 function Tour() {
   const [sdk, setSdk] = useState<MpSdk>();
-  const [horizontal, setHorizontal] = useState(45);
-  const [vertical, setVertical] = useState(15);
   const [favorites, setFavorites] = useState<any[]>([]);
   const [visited, setVisited] = useState(new Set<number>());
+  const [isControlsVisible, setControlsVisible] = useState(false);
+
+  const handleMouseEnter = () => {
+    setControlsVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    setControlsVisible(false);
+  };
 
   const container = useRef<HTMLDivElement>(null);
 
   let started = false;
 
+  const handleScroll = (event) => {
+    const container = event.target;
+    const scrollAmount = event.deltaY;
+    container.scrollTo({
+      top: 0,
+      left: container.scrollLeft + scrollAmount,
+      behavior: 'auto'
+    });
+  };
+
   useEffect(() => {
     if (!started && container.current) {
       started = true;
-      setupSdk("nid5a57zkc7ecf32m9nig3ncb", {
+      setupSdk("wgb4afxumeh29db8d1rr2nyya", {
         container: container.current,
-        space: "mbb564E3oxH",
+        space: "fd5cUURtJq2",
         iframeQueryParams: { qs: 1 },
+        iframeAttributes: {
+          allowFullScreen: true,
+          frameborder: 0,
+          allowtransparency: true
+        }
       }).then(setSdk);
 
     }
@@ -60,9 +82,6 @@ function Tour() {
       }
     });
   });
-  const rotate = () => {
-    sdk?.Camera.rotate(horizontal, vertical);
-  };
 
   const goToFavorite = (sid: any) => {
     sdk?.Mattertag.navigateToTag(sid, sdk?.Mattertag.Transition.FLY);
@@ -72,53 +91,43 @@ function Tour() {
 
   return (
     <>
-      <div className="container" ref={container} ></div>
-      {visited.size}
-      {favorites.length}
-      <Progress percent={visited.size / favorites.length * 100} />
-      <div className="grid gap-2.5 my-5 mx-auto max-w-[150px] justify-center">
-      {/*<ol>
-          {favorites.map(fav => <li key={fav.id}>
-            <button onClick={() => goToFavorite(fav.id)}>{fav.label}</button>
-          </li>)}
-        </ol>*/}
-        <ol className="predefTag">
+      <div className="overlay" onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}>
+        <div className="controls">
+        
+        
+        {isControlsVisible && <ol className="predefTag" onWheel={handleScroll}>
           {favorites.map((fav, index) => (
-            <li key={fav.id} className={`predefTag-${index + 1}`}>
+            <li key={fav.id} className={`predefTag-${index + 1}`} >
                 <button onClick={() => goToFavorite(fav.id)}>{fav.label}</button>
             </li>
           ))}
-        </ol>
-
-        <label className="text-sm">
-          <span className="font-bold">Horizontal rotation</span>
-          <input
-            type="number"
-            value={horizontal}
-            onInput={(evt) =>
-              setHorizontal(parseFloat((evt.target as HTMLInputElement).value))
+        </ol>}
+        <Progress percent={visited.size / favorites.length * 100} 
+        theme={
+          {
+            error: {
+              trailColor: 'pink',
+              color: 'red'
+            },
+            default: {
+              trailColor: 'lightblue',
+              color: 'blue'
+            },
+            active: {
+              color: '#fbc630'
+            },
+            success: {
+              trailColor: 'lime',
+              color: 'green'
             }
-            className="border border-gray-300 rounded-md px-3 py-2 mt-1 text-sm w-full"
-          />
-        </label>
-        <label className="text-sm">
-          <span className="font-bold">Vertical rotation</span>
-          <input
-            type="number"
-            value={vertical}
-            onInput={(evt) =>
-              setVertical(parseFloat((evt.target as HTMLInputElement).value))
-            }
-            className="border border-gray-300 rounded-md px-3 py-2 mt-1 text-sm w-full"
-          />
-        </label>
-        <button
-          onClick={rotate}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Rotate
-        </button>
+          }
+        }/>
+        </div>
       </div>
+      <div className="container" ref={container} ></div>
+      
+      
     </>
   )
 }

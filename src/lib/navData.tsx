@@ -19,7 +19,7 @@ export const navData = [
     {
         id: 2,
         icon: <ModelTrainingRoundedIcon/>,
-        text: "Progress",
-        link: "Progress"
+        text: "Apply Now",
+        link: "https://admission.tip.edu.ph/web/"
     },
 ]

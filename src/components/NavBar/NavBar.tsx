@@ -16,8 +16,8 @@ export default function NavBar() {
         {open ? <MenuRoundedIcon/> : <MenuOpenRoundedIcon/>}
       </button>
       <div className={open ? styles.topnav : styles.topnavOpen}>
-        <a href="/" className={styles.toplogo}><img src="../../assets/tip-informal-logo.png" alt="logo"
-                                                    className="w-full h-12 object-contain"/></a>
+        {/*<a href="/" className={open ? styles.toplogo : styles.toplogoOpen}><img src="../../assets/tip-informal-logo.png" alt="logo"
+                                                    /></a>*/}
         {navData.map(item => {
           return <NavLink key={item.id} className={styles.topitem} to={item.link}>
             {item.icon}
