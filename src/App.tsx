@@ -1,4 +1,5 @@
 import "./App.css";
+import About from './components/About/About';
 import NavBar from "./components/NavBar/NavBar";
 import Home from "./scenes/Home";
 import {
@@ -15,6 +16,7 @@ function App() {
      <main className="container min-h-screen">
        <Routes>
          <Route path="/" element={<Home />}/>
+         <Route path="/about" element={<About />}/>
        </Routes>
      </main>
    </div>
