@@ -1,5 +1,6 @@
 import { MpSdk, setupSdk } from "@matterport/sdk";
 import { useEffect, useRef, useState } from "react";
+// @ts-ignore
 import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
 
@@ -9,7 +10,8 @@ function Tour() {
   const [sdk, setSdk] = useState<MpSdk>();
   const [favorites, setFavorites] = useState<any[]>([]);
   const [visited, setVisited] = useState(new Set<number>());
-  const [isControlsVisible, setControlsVisible] = useState(false);
+  const [controlsVisible, setControlsVisible] = useState(false);
+  const [progressVisible, setProgressVisible] = useState(false);
 
   const handleMouseEnter = () => {
     setControlsVisible(true);
@@ -23,7 +25,7 @@ function Tour() {
 
   let started = false;
 
-  const handleScroll = (event) => {
+  const handleScroll = (event: any) => {
     const container = event.target;
     const scrollAmount = event.deltaY;
     container.scrollTo({
@@ -69,6 +71,7 @@ function Tour() {
           newFavorites.push(value);
         }
         setFavorites([...newFavorites]);
+        setProgressVisible(true);
       }
     });
   }, [sdk]);
@@ -94,40 +97,42 @@ function Tour() {
       <div className="overlay" onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}>
         <div className="controls">
-        
-        
-        {isControlsVisible && <ol className="predefTag" onWheel={handleScroll}>
-          {favorites.map((fav, index) => (
-            <li key={fav.id} className={`predefTag-${index + 1}`} >
-                <button onClick={() => goToFavorite(fav.id)}>{fav.label}</button>
-            </li>
-          ))}
-        </ol>}
-        <Progress percent={visited.size / favorites.length * 100} 
-        theme={
-          {
-            error: {
-              trailColor: 'pink',
-              color: 'red'
-            },
-            default: {
-              trailColor: 'lightblue',
-              color: 'blue'
-            },
-            active: {
-              color: '#fbc630'
-            },
-            success: {
-              trailColor: 'lime',
-              color: 'green'
-            }
+
+
+          {controlsVisible && <ol className="predefTag" onWheel={handleScroll}>
+            {favorites.map((fav, index) => (
+              <li key={fav.id} className={`predefTag-${index + 1}`} >
+                  <button onClick={() => goToFavorite(fav.id)}>{fav.label}</button>
+              </li>
+            ))}
+            </ol>
           }
-        }/>
+          {progressVisible &&
+            <Progress percent={visited.size / favorites.length * 100} theme={
+              {
+                error: {
+                  trailColor: 'pink',
+                  color: 'red'
+                },
+                default: {
+                  trailColor: 'lightblue',
+                  color: 'blue'
+                },
+                active: {
+                  color: '#fbc630'
+                },
+                success: {
+                  trailColor: 'lime',
+                  color: 'green'
+                }
+              }
+            }/>
+          }
         </div>
       </div>
       <div className="container" ref={container} ></div>
-      
-      
+
+
     </>
   )
 }
