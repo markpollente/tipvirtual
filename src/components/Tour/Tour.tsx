@@ -1,5 +1,6 @@
 import { MpSdk, setupSdk } from "@matterport/sdk";
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from 'react-router-dom';
 // @ts-ignore
 import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
@@ -12,6 +13,7 @@ function Tour() {
   const [visited, setVisited] = useState(new Set<number>());
   const [controlsVisible, setControlsVisible] = useState(false);
   const [progressVisible, setProgressVisible] = useState(false);
+  const location = useLocation();
 
   const handleMouseEnter = () => {
     setControlsVisible(true);
@@ -74,6 +76,11 @@ function Tour() {
         setProgressVisible(true);
       }
     });
+
+    if (location.state?.tag) {
+      goToFavorite(location.state.tag);
+    }
+
   }, [sdk]);
   sdk?.Camera.pose.subscribe(pose => {
     let position = pose.position;
