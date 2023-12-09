@@ -1,20 +1,13 @@
 import './About.css';
-import { useNavigate } from 'react-router-dom';
 
 const About = () => {
-  const navigate = useNavigate();
-
-  const navigateToTag = (tag: string) => {
-    navigate('/', {state: {tag: tag}});
-  }
 
   return (
     <div className="about-container">
       <h2 className="heading">About Us</h2>
       <p className="paragraph">
-        <a onClick={() => navigateToTag('Q0tuzARZQHc')}>Welcome to our website</a>! We are a passionate team dedicated to bringing you valuable
-        information and services. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Nullam in velit ac nisi rhoncus rhoncus.
+        Welcome to our web application! We are a passionate team dedicated to bringing you valuable
+        information and services. Through the help of our client and expert, Engineer Ryan Francisco, the idea was made possible!
       </p>
       <p className="paragraph">
         Our mission is to provide quality content and services that cater to your needs. Feel

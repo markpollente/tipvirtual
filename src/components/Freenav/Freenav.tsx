@@ -2,13 +2,9 @@ import { MpSdk, setupSdk } from "@matterport/sdk";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from 'react-router-dom';
 // @ts-ignore
-import { Progress } from 'react-sweet-progress';
-import "react-sweet-progress/lib/style.css";
-import confetti from 'canvas-confetti';
-import CloseIcon from '@mui/icons-material/Close';
-import "./Tour.css";
+import "./Freenav.css";
 
-function Tour() {
+function Freenav() {
   const [sdk, setSdk] = useState<MpSdk>();
   const [favorites, setFavorites] = useState<any[]>([]);
   const [visited, setVisited] = useState(new Set<number>());
@@ -16,8 +12,6 @@ function Tour() {
   const [progressVisible, setProgressVisible] = useState(false);
   const [currentTag, setCurrentTag] = useState<string | null>(null);
   const location = useLocation();
-  const [showCongrats, setShowCongrats] = useState(false);
-  const [congratsShown, setCongratsShown] = useState(false);
 
 
   const handleMouseEnter = () => {
@@ -105,38 +99,11 @@ function Tour() {
     setVisited(new Set(visited));
   }
   
-  useEffect(() => {
-    if (progressVisible && visited.size === favorites.length && !congratsShown) {
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
-      setShowCongrats(true);
-      setCongratsShown(true); 
-    }
-  }, [visited, favorites.length, progressVisible, congratsShown]);
-
-  const Congrats = () => (
-    <div className="congrats">
-      <div className="congrats-content">
-        Congratulations!<br/><br/>
-        You've discovered all the points of interest.<br/>
-        <button onClick={() => setShowCongrats(false)} className="close-congrats-btn">
-          <CloseIcon/>
-        </button>
-        
-      </div>
-    </div>
-  );
-  
-  
 
   return (
     <>
       <div className="overlay" onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}>
-            {showCongrats && <Congrats />}
         <div className="controls">
 
 
@@ -154,28 +121,6 @@ function Tour() {
               );
             })}
             </ol>
-          
-          {progressVisible &&
-            <Progress percent={visited.size / favorites.length * 100} theme={
-              {
-                error: {
-                  trailColor: 'pink',
-                  color: 'red'
-                },
-                default: {
-                  trailColor: 'lightblue',
-                  color: 'blue'
-                },
-                active: {
-                  color: '#fbc630'
-                },
-                success: {
-                  trailColor: 'lime',
-                  color: 'green'
-                }
-              }
-            }/>
-          }
         </div>
       </div>
       {controlsVisible && <div className="dark-overlay"></div>}
@@ -186,4 +131,4 @@ function Tour() {
   )
 }
 
-export default Tour;
+export default Freenav;

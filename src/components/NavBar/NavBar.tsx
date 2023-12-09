@@ -12,7 +12,7 @@ export default function NavBar() {
   };
   return (
     <div className={open ? styles.topnavBtn : styles.topnavBtnOpen}>
-      <button className={styles.menuBtn} onClick={toggleOpen}>
+      <button className={open ? styles.menuBtn : styles.menuBtnOpen} onClick={toggleOpen}>
         {open ? <MenuRoundedIcon/> : <MenuOpenRoundedIcon/>}
       </button>
       <div className={open ? styles.topnav : styles.topnavOpen}>
