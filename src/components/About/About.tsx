@@ -7,7 +7,7 @@ const About = () => {
       <h2 className="heading">About Us</h2>
       <p className="paragraph">
         Welcome to our web application! We are a passionate team dedicated to bringing you valuable
-        information and services. Through the help of our client and expert, Engineer Ryan Francisco, the idea was made possible!
+        information and services. Through the help of our client and expert, Engr. Ryan Francisco, the idea was made possible!
       </p>
       <p className="paragraph">
         Our mission is to provide quality content and services that cater to your needs. Feel
